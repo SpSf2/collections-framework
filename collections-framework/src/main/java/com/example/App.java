@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -71,7 +72,46 @@ public class App {
         /* La lista resultante "personas" no es de tamaño fijo porque no se ha obtanido a paartir de un array
          * por lo cual le puedo agregar o eliminar elementos a necesidad del usuario
          */
-       
+       System.out.println("----------LISTADO ORIGINAL DE PERSONAS---------\n");
        System.out.println(personas);
+       
+       //  Traversing Collections:
+       
+       //https://docs.oracle.com/javase/tutorial/collections/interfaces/collection.html
+       // ver el documento Arrays, Generics and Collection Framework
+       
+       /* Existen 3 formas de recorrer una colección, de las cuales solamnete una permite eliminar elementos
+        * de una clección a la vez que se recorre:
+        * 
+        * 1- Utilizando un iterador, es decir, interfaz Iterator<E> que es la única forma de eliminar un ele-
+        * mento de la colección a la misma vez que se recorre.
+        * 
+        * 2- Utilizando una sentencia For mejorada.
+        * 3- La VARIANTE SUGERIDA: utilizando operaciones de agregado, es decir, Programación Funcional, meto-
+        * dos de clase Stream, métodos por referencia y peraciones Lambda.   
+        * */
+       /*  VARIANTE 1 DE RECORRER / ITERAR SOBRE UNA COLECCION UTILIZANDO UN ITERADOR:
+        * 
+        *  Vamos a recorrer la colección de personas y eliminar las personas del genero HOMBRE*/
+       Iterator<Persona> it = personas.iterator();
+       
+       while (it.hasNext()) {
+    	   
+    	   if (it.next().genero().equals(Genero.HOMBRE))  {
+    		   
+    		   it.remove();
+    	   }
+       }
+       
+       
+       
+       System.out.println("\n----------LISTADO resultante DESPUES DE ELIMINAR PERSONAS DEL GENERO HOMBRE---------\n");
+       System.out.println(personas);
+       
+       /* Ejercicio #1
+        * Utilizando un iterador, eliminar del listado personas, aquellas que sean del genero HOMBRE y el nombre tenga
+        * 6 caracteres.  Se hará un commit antes de realizar el ejercicio para luego comentar el iterador y tener la 
+        * lista original  sin elemento eliminados*/
+       
     }
 }
