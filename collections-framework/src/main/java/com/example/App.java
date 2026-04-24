@@ -31,60 +31,47 @@ public class App {
     	 * a la lista*/
         
     	// var, realmente es : List<Persona>, se utiliza para crear variables locales
-       var personas = new ArrayList<Persona>();
-       
-       Persona persona1 = Persona.builder()
-       		.nombre("Duglas")
-       		.primerApellido("González")
-       		.segundoApellido("Villamizar")
-       		.fechaNacimiento(LocalDate.of(1995, Month.APRIL, 15))
-       		.genero(Genero.HOMBRE)
-       		.build();
+    	var personas = new ArrayList<Persona>();
+        
+    	personas.add(
+	  Persona.builder()
+	       		.nombre("Duglas")
+	       		.primerApellido("González")
+	       		.segundoApellido("Villamizar")
+	       		.fechaNacimiento(LocalDate.of(1995, Month.APRIL, 15))
+	       		.genero(Genero.HOMBRE)
+	       		.build());
        		
-              
-       Persona persona2 = Persona.builder()
-          		.nombre("Carolina")
-          		.primerApellido("Garzón")
-          		.segundoApellido("Becerra")
-          		.fechaNacimiento(LocalDate.of(2000, Month.OCTOBER, 10))
-          		.genero(Genero.MUJER)
-          		.build();
-          		
-                    
-       Persona persona3 = Persona.builder()
-         		.nombre("María")
-         		.primerApellido("Garzón")
-         		.segundoApellido("González")
-         		.fechaNacimiento(LocalDate.of(2005, Month.DECEMBER, 14))
-         		.genero(Genero.MUJER)
-         		.build();
-         		
-                  
-       Persona persona4 = Persona.builder()
-        		.nombre("Jeronimo")
-        		.primerApellido("Arenal")
-        		.segundoApellido("Gómez")
-        		.fechaNacimiento(LocalDate.of(1989, Month.MAY, 22))
-        		.genero(Genero.HOMBRE)
-        		.build();
+        personas.add(      
+	  Persona.builder()
+	      		.nombre("Carolina")
+	      		.primerApellido("Garzón")
+	      		.segundoApellido("Becerra")
+	      		.fechaNacimiento(LocalDate.of(2000, Month.OCTOBER, 10))
+	      		.genero(Genero.MUJER)
+	      		.build());
+      		
+        personas.add(       
+	  Persona.builder()
+	    		.nombre("María")
+	     		.primerApellido("Garzón")
+	     		.segundoApellido("González")
+	     		.fechaNacimiento(LocalDate.of(2005, Month.DECEMBER, 14))
+	     		.genero(Genero.MUJER)
+	     		.build());
+     		
+        personas.add(      
+	  Persona.builder()
+	    		.nombre("Jeronimo")
+	    		.primerApellido("Arenal")
+	    		.segundoApellido("Gómez")
+	    		.fechaNacimiento(LocalDate.of(1989, Month.MAY, 22))
+	    		.genero(Genero.HOMBRE)
+	    		.build());
+        /* La lista resultante "personas" no es de tamaño fijo porque no se ha obtanido a paartir de un array
+         * por lo cual le puedo agregar o eliminar elementos a necesidad del usuario
+         */
        
-       personas.add(persona1);
-       personas.add(persona2);
-       personas.add(persona3);
-       personas.add(persona4);
-       
-       /* EN LUGAR DE INVOCAR EL METODO ADD 4 VECES COMO SE HA MOSTRADO ANTERIORMENTE, SE PODRÍA AGREGAR ELEMENTOS
-        *  A LA LISTA DE LA FORMA SIGUIENTE: */
-       
-       personas = (ArrayList<Persona>) Arrays.asList(persona1, persona2, persona3, persona4);
-       
-       /* Si la lista de personas apunta a "null", entonces no podemos agregar elementos "persona2 a dicha lista, porque, 
-        * no hemos reservado memoria para la lista "personas.
-        * 
-        * ¿ Como se reserva memoria para la lista de "personas" ?
-        * 
-        * Utilizando el constructor de alguna de las clases que implementa la interfaz List*/
-       
-       
+       System.out.println(personas);
     }
 }
