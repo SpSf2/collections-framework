@@ -93,7 +93,10 @@ public class App {
        /*  VARIANTE 1 DE RECORRER / ITERAR SOBRE UNA COLECCION UTILIZANDO UN ITERADOR:
         * 
         *  Vamos a recorrer la colección de personas y eliminar las personas del genero HOMBRE*/
-       Iterator<Persona> it = personas.iterator();
+       
+       
+       
+       /* Iterator<Persona> it = personas.iterator();
        
        while (it.hasNext()) {
     	   
@@ -106,12 +109,41 @@ public class App {
        
        
        System.out.println("\n----------LISTADO resultante DESPUES DE ELIMINAR PERSONAS DEL GENERO HOMBRE---------\n");
-       System.out.println(personas);
+       System.out.println(personas);  /*
        
        /* Ejercicio #1
         * Utilizando un iterador, eliminar del listado personas, aquellas que sean del genero HOMBRE y el nombre tenga
         * 6 caracteres.  Se hará un commit antes de realizar el ejercicio para luego comentar el iterador y tener la 
         * lista original  sin elemento eliminados*/
        
+			Iterator<Persona> it = personas.iterator();
+			       
+			       while (it.hasNext()) {
+			    	   
+			    	   Persona ejemplo = it.next(); // variable que suplanta al metodo y adquiere su valor
+			    	   
+			    	   if (ejemplo.genero().equals(Genero.HOMBRE) && ejemplo.nombre().length() == 6)  {
+			    		   
+			    		   it.remove();
+			    		   
+			   /* El problema al añadir la longitud del nombre, Cuando quieres añadir “nombre con 6 caracteres”, 
+			    * es que necesitas acceder dos veces al mismo elemento:
+						
+					Una para genero()
+					
+					Otra para nombre().length()
+					
+					Pero si haces:
+										
+					if (it.next().genero().equals(...) && it.next().nombre().length() == 6) { ... }
+					cada it.next() avanza al siguiente elemento, así que comparas un hombre con un elemento 
+					distinto, y rompe todo.
+					
+					Así que la única forma limpia es (con variable)*/
+    	   }
+             	     	   
+		}
+	       System.out.println("\n----------LISTADO resultante DESPUES DE ELIMINAR a Duglas---------\n");
+           System.out.println(personas);	  
     }
 }
