@@ -145,5 +145,18 @@ public class App {
 		}
 	       System.out.println("\n----------LISTADO resultante DESPUES DE ELIMINAR a Duglas---------\n");
            System.out.println(personas);	  
-    }
+           
+           /*  VARIANTE #2 DE ITERAR/RECORRER UNA COLECCION UTILIZANDO UN FOR MEJORADO
+            * 
+            * ejm: Intentemos recorrer la lista de persona y eliminar las personas de genero mujer para comprobar 
+            * que no es posible eliminar un elemento de la colección mientras se recorre utilizando el for each
+            * */
+           /*for (var p: personas)  {
+        	   
+        	   if (p.genero().equals(Genero.MUJER))
+        		   personas.remove(p);  
+        		   */
+    
+		}
+    
 }
