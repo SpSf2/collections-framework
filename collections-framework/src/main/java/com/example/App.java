@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * El Framework de Collecciones:
@@ -188,9 +189,27 @@ public class App {
       /*  Filtro filtro = new Filtro();
            
     	personas.stream().filter(filtro)  */
-        personas.stream().filter(new Filtro());
+        
+         //  personas.stream().filter(new Filtro());
     	
-		
+	  /*  El código hasta el momento se consideraría una total exageración, tener que crear una clase
+	   * externa solamente para implementar la interfaz funcional predicate.
+	   * 
+	   * por lo cual un enfoque más eficiente sería crear una clase en el mismo sitio donde se va a 
+	   * instanciar el objeto, osea dentro de los parentesis de filter.
+	   * 
+	   * Que es una clase Anónima:  es una clase que no tiene nombre.  Una vez que se declara no se 
+	   * podría utilizar para instanciar un objeto.  Es una expresión de clase.
+	   * Se puede utiliar para instanciar un objeto a partir de una interfaz o una clase abstracta.
+	   * */
+        personas.stream().filter(new Predicate<Persona>() {
+
+			@Override
+			public boolean test(Persona p) {
+				// TODO Auto-generated method stub
+				return p.genero().equals(Genero.MUJER);
+			}
+		});
     }
 }
 
