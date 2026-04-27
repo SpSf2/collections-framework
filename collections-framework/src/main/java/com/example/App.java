@@ -277,5 +277,33 @@ public class App {
             *    () -> 
             *    
             *    Rpta: Si!!!  no necesariamente debe llevar parametros para poder funcionar */
+           
+           /**
+            * Hasta el momento hemos creado colecciones List, en este caso, asignando memoria  a
+            * través de los constructores de las clases que implementnla interfaz, para posteriormente
+            * utilizar el método add(), y tambien a paratir de un array que daría como resultado una
+            * colección de tamaño fijo.
+            * 
+            * ¿  Como crear una colección inmutable, es decir, que no se pueda modificar, ni agregar, 
+            * ni eliminar elementos?   */
+           
+           	List<String> listaInmutable = List.of("Jeronimo", "Duglas", "Carolina");
+           
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
