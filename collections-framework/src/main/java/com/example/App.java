@@ -11,10 +11,10 @@ import java.util.function.Predicate;
 /**
  * El Framework de Collecciones:
  * 
- *  https://docs.oracle.com/javase/tutorial/collections/index.html
+ * https://docs.oracle.com/javase/tutorial/collections/index.html
  */
 public class App {
-    public static void main(String[] args) {
+	public static void main(String[] args) {
     	
     	/* Colleccion de numeros enteros, a partir de un array */
     	
@@ -201,23 +201,32 @@ public class App {
 	   * Que es una clase Anónima:  es una clase que no tiene nombre.  Una vez que se declara no se 
 	   * podría utilizar para instanciar un objeto.  Es una expresión de clase.
 	   * Se puede utiliar para instanciar un objeto a partir de una interfaz o una clase abstracta.
-	   * */
+	   * */ 
+           /*
         personas.stream().filter(new Predicate<Persona>() {
 
 			@Override
 			public boolean test(Persona p) {
 				// TODO Auto-generated method stub
 				return p.genero().equals(Genero.MUJER);
-			}
-		});
+			}  
+		}); 
+		*/ 
+      /*  El uso de la expresión de clase "anónima" es mucho mejor que la implementación de la clase
+       * Filtro, pero todavía continua siendo una exageración, si no se van a declarar variables 
+       * adicionales ni se va a implementar otra cosa que no sea el metodo abstratcto de la interfaz
+       * funcional Predicate.
+       * 
+       * Y ahí aparecen las expresiones Lambda*/
+        
+        /*Una expresión  lambda hay que verla como un metodo anonimo, por lo general, se usan para
+         * implementar el metodo abstracto de las interfaces funcionales*/
+           
+      /* Tanto las clases anonimas como las expresiones lambda solamente se pueden relacionar con
+         variables locales  (declaradas dentro de metodos) que sean final o effectively final. */   
+         
+        personas.stream().filter(p -> p.genero().equals(Genero.MUJER));
+        
+    
     }
 }
-
-
-
-
-
-
-
-
-
