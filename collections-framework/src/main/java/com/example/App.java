@@ -225,8 +225,18 @@ public class App {
       /* Tanto las clases anonimas como las expresiones lambda solamente se pueden relacionar con
          variables locales  (declaradas dentro de metodos) que sean final o effectively final. */   
          
-        personas.stream().filter(p -> p.genero().equals(Genero.MUJER));
-        
+        // asi es final:   final int x = 4;
+        // efectively final implica que se ke ha asignado un valor y posteriormente no se le ha 
+        // asignado otro: 
+           int x = 7;
+           
+           personas.stream().filter(p -> {
+        	   
+        	   int y = 2;
+        	   y += x;
+        	   
+        	   return p.genero().equals(Genero.MUJER);
+           });
     
     }
 }
