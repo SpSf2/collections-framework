@@ -12,6 +12,18 @@ public record Persona (
 		LocalDate fechaNacimiento,
 		Genero genero,
 		double salario 
-) {
+		
+)	implements Comparable<Persona> {
+		
+	    @Override
+		public int compareTo(Persona persona) {
+	    	int cmpPrimerApellido = this.primerApellido.compareTo(persona.primerApellido());
+	    	
+	    	int cmpSegundoApellido = this.segundoApellido.compareTo(persona.segundoApellido());
+	    	
+	    	int cmpNombre = this.nombre.compareTo(persona.nombre());
+	    	
+			return cmpPrimerApellido != 0 ? cmpPrimerApellido : cmpSegundoApellido != 0 ? cmpSegundoApellido : cmpNombre;
+	}
 
 }

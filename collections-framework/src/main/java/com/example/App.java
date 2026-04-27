@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.OptionalDouble;
@@ -288,7 +289,32 @@ public class App {
             * ni eliminar elementos?   */
            
            	List<String> listaInmutable = List.of("Jeronimo", "Duglas", "Carolina");
-           
+           	
+          /**		https://docs.oracle.com/javase/tutorial/collections/interfaces/order.html
+           * 
+           * Object Ordering (Ordenamiento de Objetos):  
+           * 
+           *  */
+           	 
+           	 List<String> nombres = Arrays.asList("Jeronimo", "Duglas", "Carolina");
+           	 Collections.sort(nombres);
+             System.out.println(nombres);
+           	
+           /* 
+            * Intentar ordenar la lista de personas: el código siguiente da error porque el tipo persona no
+            * implementa la interfaz comparable de Persona, a diferencia de todos lostipos Build-in de Java que
+            * si implementan dicha interfaz*/  
+           	                                      // Collections.sort(personas);
+           	
+           /**
+            * A modo de ejemplo: Vamos a establecer un criterio de ordenamiento para que se ordene el listado de 
+            * personas, primero por el primer apellido, luego el segundo y si hay dos personas con los mismos 
+            * apellidos que ordene por el nombre:
+            * Vamos a clase Persona y que implemente la interfa comparable
+            * */
+           	
+           	Collections.sort(personas);
+           	
     }
 }
 
