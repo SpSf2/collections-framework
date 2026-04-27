@@ -41,6 +41,7 @@ public class App {
 	       		.segundoApellido("Villamizar")
 	       		.fechaNacimiento(LocalDate.of(1995, Month.APRIL, 15))
 	       		.genero(Genero.HOMBRE)
+	       		.salario(3500.50)
 	       		.build());
        		
         personas.add(      
@@ -50,6 +51,7 @@ public class App {
 	      		.segundoApellido("Becerra")
 	      		.fechaNacimiento(LocalDate.of(2000, Month.OCTOBER, 10))
 	      		.genero(Genero.MUJER)
+	      		.salario(3650.45)
 	      		.build());
       		
         personas.add(       
@@ -68,6 +70,7 @@ public class App {
 	    		.segundoApellido("Gómez")
 	    		.fechaNacimiento(LocalDate.of(1989, Month.MAY, 22))
 	    		.genero(Genero.HOMBRE)
+	    		.salario(3450.25)
 	    		.build());
         /* La lista resultante "personas" no es de tamaño fijo porque no se ha obtanido a paartir de un array
          * por lo cual le puedo agregar o eliminar elementos a necesidad del usuario
@@ -88,7 +91,7 @@ public class App {
         * 
         * 2- Utilizando una sentencia For mejorada.
         * 3- La VARIANTE SUGERIDA: utilizando operaciones de agregado, es decir, Programación Funcional, meto-
-        * dos de clase Stream, métodos por referencia y peraciones Lambda.   
+        * dos de clase Stream, métodos por referencia y expresiones Lambda.   
         * */
        /*  VARIANTE 1 DE RECORRER / ITERAR SOBRE UNA COLECCION UTILIZANDO UN ITERADOR:
         * 
@@ -157,6 +160,45 @@ public class App {
         		   personas.remove(p);  
         		   */
     
-		}
+		
+    //  OPERACIONES DE AGREGADO PARA RECORRER LAS COLECCIONES
+    //  https://docs.oracle.com/javase/tutorial/collections/streams/index.html
     
+    // Ejemplo: Calcular el salario promedio de las prsonas del genero Mujer
+    /* Las operaciones de agregado implican convertir la colección en un flujo(stream) de elementos
+     * que va a circular por una tuberia imaginaria o pipeline.  
+     * tuberia imaginaria o Pipeline es una secuencia de métodos de la clase stream, es una secuencia 
+     * de agregado, es deir, son métodos que para obtener un resultado agrupan elementos de flujo.
+     * 
+     * Una pipeline, tiene un origen que puede, un array ser una colección, un socket, un fichero, una
+     * consulta de base de datos, etc.  también la pipeline tiene cero, una o muchas operaciones 
+     * intermedias y una sola operción terminal.
+     * Lo primero es utilizar el metodo stream() ó parallelStream(), para convertir la colección en un
+     * flujo de elementos del mismo tipo de colección.
+     * 
+     * a partir de tener un flujo de elementos entrana a funcionar los metodos de la clase Stream,
+     * operaciones intermedias, como pódria ser el metodo filter, para permitir que solamente circule
+     * al próximo nivel de la tuberia, las personas del Genero MUJER.
+     * 
+     * PREDICATE  es una interaz funcional que puede tener metodos por defecto, que tienen: cuerpo,
+     * métodos estaticos, etc., pero solamente un método abstracto.  Un predicate es una condición
+     * que tiene que cumplir un elemento que circula por la tubería o pipeline. 
+     * */
+    
+      /*  Filtro filtro = new Filtro();
+           
+    	personas.stream().filter(filtro)  */
+        personas.stream().filter(new Filtro());
+    	
+		
+    }
 }
+
+
+
+
+
+
+
+
+
