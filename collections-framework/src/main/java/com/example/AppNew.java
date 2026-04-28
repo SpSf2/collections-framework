@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 public class AppNew {
     public static void main(String[] args) {
@@ -53,5 +54,51 @@ public class AppNew {
         Collections.sort(personas);
 
         personas.forEach(System.out::println);
+        // personas.stream().forEach(persona -> System.out.println(persona));
+        
+    /*  Supongamos que el record Persona v a a ser utilizado en otro Departamento o en otra aplicación donde no les
+     * interesa el orden natural implementado, sino ordenar por salario de menor a mayor:  */
+        
+        Collections.sort(personas, 
+        		(persona1, persona2) -> Double.valueOf(persona1.salario())
+        										.compareTo(persona2.salario()));
+        
+        System.out.println("\nListado de Personas ordenados por Salario de Menor a Mayor\n");
+        personas.forEach(System.out::println);
+        
+        //  Otra variante de ordenar por el salario:
+        
+        Collections.sort(personas,
+        		Comparator.comparingDouble(Persona::salario));
+        
+        System.out.println("\nListado de Personas ordenados por Salario de Menor a Mayor con métodos de interfaz Comparator\n");
+        personas.forEach(System.out::println);
+        
+        /*  Respetando el Natural ordering, ordenar la lista de personas por el salario de Mayor a menor*/
+        Collections.sort(personas,
+        		Comparator.comparingDouble(Persona::salario).reversed());
+        
+        System.out.println("\nListado de Personas ordenados por Salario de Menor a Mayor con .reversed()\n");
+        personas.forEach(System.out::println);
+        
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
