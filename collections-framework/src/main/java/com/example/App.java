@@ -280,7 +280,7 @@ public class App {
            
            /**
             * Hasta el momento hemos creado colecciones List, en este caso, asignando memoria  a
-            * través de los constructores de las clases que implementnla interfaz, para posteriormente
+            * través de los constructores de las clases que implementan la interfaz, para posteriormente
             * utilizar el método add(), y tambien a paratir de un array que daría como resultado una
             * colección de tamaño fijo.
             * 
@@ -288,6 +288,8 @@ public class App {
             * ni eliminar elementos?   */
            
            	List<String> listaInmutable = List.of("Jeronimo", "Duglas", "Carolina");
+           	
+           	
            
     }
 }
