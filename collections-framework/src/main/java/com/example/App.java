@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.OptionalDouble;
@@ -73,7 +75,7 @@ public class App {
 	    		.segundoApellido("Gómez")
 	    		.fechaNacimiento(LocalDate.of(1989, Month.MAY, 22))
 	    		.genero(Genero.HOMBRE)
-	    		.salario(3450.25)
+	    		.salario(3900.25)
 	    		.build());
         /* La lista resultante "personas" no es de tamaño fijo porque no se ha obtanido a paartir de un array
          * por lo cual le puedo agregar o eliminar elementos a necesidad del usuario
@@ -87,7 +89,7 @@ public class App {
        // ver el documento Arrays, Generics and Collection Framework
        
        /* Existen 3 formas de recorrer una colección, de las cuales solamnete una permite eliminar elementos
-        * de una clección a la vez que se recorre:
+        * de una colección a la vez que se recorre:
         * 
         * 1- Utilizando un iterador, es decir, interfaz Iterator<E> que es la única forma de eliminar un ele-
         * mento de la colección a la misma vez que se recorre.
@@ -121,7 +123,7 @@ public class App {
         * Utilizando un iterador, eliminar del listado personas, aquellas que sean del genero HOMBRE y el nombre tenga
         * 6 caracteres.  Se hará un commit antes de realizar el ejercicio para luego comentar el iterador y tener la 
         * lista original  sin elemento eliminados*/
-       
+   /*    
 			Iterator<Persona> it = personas.iterator();
 			       
 			       while (it.hasNext()) {
@@ -130,8 +132,10 @@ public class App {
 			    	   
 			    	   if (ejemplo.genero().equals(Genero.HOMBRE) && ejemplo.nombre().length() == 6)  {
 			    		   
-			    		   it.remove();
-			    		   
+			    		   it.remove(); 
+			    	   }  
+         	     	   
+					}
 			   /* El problema al añadir la longitud del nombre, Cuando quieres añadir “nombre con 6 caracteres”, 
 			    * es que necesitas acceder dos veces al mismo elemento:
 						
@@ -146,9 +150,7 @@ public class App {
 					distinto, y rompe todo.
 					
 					Así que la única forma limpia es (con variable)*/
-    	   }
-             	     	   
-		}
+    	   
 	       System.out.println("\n----------LISTADO resultante DESPUES DE ELIMINAR a Duglas---------\n");
            System.out.println(personas);	  
            
@@ -272,7 +274,7 @@ public class App {
            .average().orElse(0);
            
            /*
-            *   ¿ La siguiente exresión lambda podría ser válida?
+            *   ¿ La siguiente expresión lambda podría ser válida?
             *   
             *    () -> 
             *    
@@ -284,13 +286,57 @@ public class App {
             * utilizar el método add(), y tambien a paratir de un array que daría como resultado una
             * colección de tamaño fijo.
             * 
-            * ¿  Como crear una colección inmutable, es decir, que no se pueda modificar, ni agregar, 
-            * ni eliminar elementos?   */
+               */
            
+           // Colección creada a partir de un array, genera una colección de tamaño fijo, es decir, no se puede
+           /* agregar ni eliminar ningún elemento pero si se pueden modificar los elementos*/
+           
+           	List<Integer> listadoNumerosFixedSize = Arrays.asList(10, 12, 14);
+           	
+           	/* Colección a la cual se le pueden agregar o eliminar elementos en cualquier momento: */
+           	
+           	List<Integer> listaVariableSize = new ArrayList<Integer>();
+           	listaVariableSize.addAll(listadoNumerosFixedSize);
+           	listaVariableSize.add(16);
+           	listaVariableSize.add(18);
+           	
+           	/*  * ¿  Como crear una colección inmutable, es decir, que no se pueda modificar, ni agregar, 
+            * ni eliminar elementos?
+            * Rpta: se puede generar con el metodo estatico "of" y con "copyOf"   */
            	List<String> listaInmutable = List.of("Jeronimo", "Duglas", "Carolina");
+           	List<String> listaInmutable_2 = List.copyOf(Arrays.asList("Alex", "Javier", "Alberto"));
            	
+           	/*  Ninguna de las 2 anteriores se pueden ordenar con el método sort() de la clase collections
+           	 * pero si se pueden convertir a un flujo (Stream) de elementos y ordenar dichos elementos que
+           	 * pasan por la tubería o pipeline*/
+           	 //  Collections.sort(listaInmutable);  da error
            	
-           
+           	/*  Para poder ordenar utilizamos el metodo sorted() de Stream mientras se recorre el Array*/
+           	listaInmutable.stream()
+           		.sorted()
+           		.forEach(System.out::println);
+           	
+           	/**
+           	 *  EJERCICIO:
+           	 *  	El listado de personas, ordenarlo sin modificar el orden natural, por Genero y salario,
+           	 *  que se muestren los que tienen mayor salario primero
+           	 *  */
+           	
+           	//  Tener cuidado que en el código siguiente, al final, invierte todo, no solamente el salario, aunque
+           	// cumple con el enunciado, el orden natural no lo respeta.  
+           	personas.stream()
+            		.sorted(Comparator.comparing(Persona::genero)
+           			   .thenComparing(Comparator.comparingDouble(Persona::salario).reversed()))
+           			   .forEach(System.out::println);
+           	System.out.println();
+           	
+          /*  También en el enum si una variable esta declarada antes que otra, primero toma el valor de esa primera
+           *  posición y ordena por ahí, en este caso MUJER y no debería porque el hombre es el que tiene mayor salario
+           *  */
+           	personas.stream()
+    		.sorted(Comparator.comparing((Persona p) -> p.genero().name())
+   			   .thenComparing(Comparator.comparingDouble(Persona::salario).reversed()))
+   			   .forEach(System.out::println);
     }
 }
 
