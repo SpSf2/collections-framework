@@ -5,6 +5,7 @@ import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.OptionalDouble;
@@ -288,7 +289,7 @@ public class App {
             * ¿  Como crear una colección inmutable, es decir, que no se pueda modificar, ni agregar, 
             * ni eliminar elementos?   */
            
-           	List<String> listaInmutable = List.of("Jeronimo", "Duglas", "Carolina");
+          // 	List<String> listaInmutable = List.of("Jeronimo", "Duglas", "Carolina");
            	
           /**		https://docs.oracle.com/javase/tutorial/collections/interfaces/order.html
            * 
@@ -296,11 +297,11 @@ public class App {
            * 
            *  */
            	 
-           	 List<String> nombres = Arrays.asList("Jeronimo", "Duglas", "Carolina");
+         /*  	 List<String> nombres = Arrays.asList("Jeronimo", "Duglas", "Carolina");
            	 Collections.sort(nombres);
              System.out.println(nombres);
            	
-           /* 
+            
             * Intentar ordenar la lista de personas: el código siguiente da error porque el tipo persona no
             * implementa la interfaz comparable de Persona, a diferencia de todos lostipos Build-in de Java que
             * si implementan dicha interfaz*/  
@@ -310,10 +311,58 @@ public class App {
             * A modo de ejemplo: Vamos a establecer un criterio de ordenamiento para que se ordene el listado de 
             * personas, primero por el primer apellido, luego el segundo y si hay dos personas con los mismos 
             * apellidos que ordene por el nombre:
-            * Vamos a clase Persona y que implemente la interfa comparable
-            * */
+            * Vamos a clase Persona y que implemente la interfaz comparable
+            * 
            	
-           	Collections.sort(personas);
+           	Collections.sort(personas);  */  
+           	/*comentado antes de la actualización para incluir los datos de la rama traversing collections agragate operations que pertenecian a esta  */
+           	
+	/* Colección a la cual se le pueden agregar o eliminar elementos en cualquier momento: */
+           
+            List<Integer> listadoNumerosFixedSize = Arrays.asList(10, 12, 14);
+           	
+           	List<Integer> listaVariableSize = new ArrayList<Integer>();
+           	listaVariableSize.addAll(listadoNumerosFixedSize);
+           	listaVariableSize.add(16);
+           	listaVariableSize.add(18);
+           	
+           	/*  * ¿  Como crear una colección inmutable, es decir, que no se pueda modificar, ni agregar, 
+            * ni eliminar elementos?
+            * Rpta: se puede generar con el metodo estatico "of" y con "copyOf"   */
+           	List<String> listaInmutable = List.of("Jeronimo", "Duglas", "Carolina");
+           	List<String> listaInmutable_2 = List.copyOf(Arrays.asList("Alex", "Javier", "Alberto"));
+           	
+           	/*  Ninguna de las 2 anteriores se pueden ordenar con el método sort() de la clase collections
+           	 * pero si se pueden convertir a un flujo (Stream) de elementos y ordenar dichos elementos que
+           	 * pasan por la tubería o pipeline*/
+           	 //  Collections.sort(listaInmutable);  da error
+           	
+           	/*  Para poder ordenar utilizamos el metodo sorted() de Stream mientras se recorre el Array*/
+           	listaInmutable.stream()
+           		.sorted()
+           		.forEach(System.out::println);
+           	
+           	/**
+           	 *  EJERCICIO:
+           	 *  	El listado de personas, ordenarlo sin modificar el orden natural, por Genero y salario,
+           	 *  que se muestren los que tienen mayor salario primero
+           	 *  */
+           	
+           	//  Tener cuidado que en el código siguiente, al final, invierte todo, no solamente el salario, aunque
+           	// cumple con el enunciado, el orden natural no lo respeta.  
+           	personas.stream()
+            		.sorted(Comparator.comparing(Persona::genero)
+           			   .thenComparing(Comparator.comparingDouble(Persona::salario).reversed()))
+           			   .forEach(System.out::println);
+           	System.out.println();
+           	
+          /*  También en el enum si una variable esta declarada antes que otra, primero toma el valor de esa primera
+           *  posición y ordena por ahí, en este caso MUJER y no debería porque el hombre es el que tiene mayor salario
+           *  */
+           	personas.stream()
+    		.sorted(Comparator.comparing((Persona p) -> p.genero().name())
+   			   .thenComparing(Comparator.comparingDouble(Persona::salario).reversed()))
+   			   .forEach(System.out::println);
            	
     }
 }
